@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/usr/local/google/home/subratp/.gconf'
+let g:netrw_dirhist_2='/usr/local/google/home/subratp/.gconf/apps'
+let g:netrw_dirhist_3='/usr/local/google/home/subratp/go/src/github.com/GoogleCloudPlatform/compute-image-tools'
+let g:netrw_dirhist_4='/usr/local/google/home/subratp/go/src/k8s.io/test-infra/prow/config'
