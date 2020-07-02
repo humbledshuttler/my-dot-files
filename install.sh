@@ -1,16 +1,24 @@
 #!/bin/bash
 
+c_dir=`basename "$PWD"`
+if [ "$c_dir" != "my-dot-files" ]; then
+	echo "run install.sh from root directory"
+	exit 1
+fi
+
 set -e
 
 sudo apt install -y zsh
 
-cp -r dotoh-my-zsh ${HOME}/.oh-my-zsh
-cp ./dotzshrc ${HOME}/.zshrc
+working_dir=${PWD}
 
-cp ./dotvimrc ${HOME}/.vimrc
-cp -r ./dotvim ${HOME}/.vim
+ln -sv ${working_dir}/dotoh-my-zsh ${HOME}/.oh-my-zsh
+ln -sv ${working_dir}/dotzshrc ${HOME}/.zshrc
 
-cp ./dottmux.conf ${HOME}/.tmux.conf
-cp -r ./dottmux-plugins ${HOME}/.tmux-plugins
+ln -sv ${working_dir}/dotvimrc ${HOME}/.vimrc
+ln -sv ${working_dir}/dotvim ${HOME}/.vim
+
+ln -sv ${working_dir}/dottmux.conf ${HOME}/.tmux.conf
+ln -sv ${working_dir}/dottmux-plugins ${HOME}/.tmux-plugins
 
 source ${HOME}/.zshrc
