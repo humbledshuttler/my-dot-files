@@ -111,9 +111,8 @@ source $ZSH/oh-my-zsh.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source /etc/bash_completion.d/g4d
+# source /etc/bash_completion.d/g4d
 
 export PATH="$PATH:$HOME/my-packages/node-v8.11.4-linux-x64/bin"
 export PATH="$PATH:$HOME/bin"

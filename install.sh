@@ -6,7 +6,6 @@ if [ "$c_dir" != "my-dot-files" ]; then
 	exit 1
 fi
 
-set -e
 
 sudo apt install -y zsh
 
