@@ -20,5 +20,7 @@ ln -sv ${working_dir}/dotvim ${HOME}/.vim
 ln -sv ${working_dir}/dottmux.conf ${HOME}/.tmux.conf
 ln -sv ${working_dir}/dottmux-plugins ${HOME}/.tmux-plugins
 ln -sv ${working_dir}/dotgitconfig ${HOME}/.gitconfig
+ln -sv ${working_dir}/dotp10k.zsh ${HOME}/.p10k.sh
+
 
 source ${HOME}/.zshrc
