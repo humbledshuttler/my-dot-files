@@ -6,8 +6,11 @@ if [ "$c_dir" != "my-dot-files" ]; then
 	exit 1
 fi
 
-
+# install zsh
 sudo apt install -y zsh
+
+# install powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 working_dir=${PWD}
 
