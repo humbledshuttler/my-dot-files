@@ -6,8 +6,19 @@ if [ "$c_dir" != "my-dot-files" ]; then
 	exit 1
 fi
 
+APT=/usr/bin/apt
+DNF=/usr/bin/dnf
+
 # install zsh
-sudo apt install -y zsh
+if [ -f "$APT" ]; then
+    echo "found apt. Installing zsh"
+    sudo apt install -y zsh
+fi
+
+if [ -f "$DNF" ]; then
+    echo "Found dnf. Installing dnf"
+    sudo dnf install -y zsh
+fi
 
 working_dir=${PWD}
 
