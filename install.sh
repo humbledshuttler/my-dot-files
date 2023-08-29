@@ -20,21 +20,67 @@ if [ -f "$DNF" ]; then
     sudo dnf install -y zsh
 fi
 
+# Check if tmux is already installed
+if ! command -v tmux >/dev/null; then
+
+  # Install tmux
+  sudo apt update
+  sudo apt install tmux
+
+  # Tell the user that tmux has been installed
+  echo "tmux has been installed."
+fi
+
+# Check if ctags is already installed
+if ! command -v ctags >/dev/null; then
+
+  # Install ctags
+  sudo apt update
+  sudo apt install ctags
+
+  # Tell the user that ctags has been installed
+  echo "ctags has been installed."
+fi
+
 working_dir=${PWD}
 
-ln -sv ${working_dir}/dotoh-my-zsh ${HOME}/.oh-my-zsh
-ln -sv ${working_dir}/dotzshrc ${HOME}/.zshrc
+# Define the create_symlink function
+function create_symlink() {
+  # Get the source and destination paths
+  source_path=$1
+  destination_path=$2
 
-ln -sv ${working_dir}/dotvimrc ${HOME}/.vimrc
-ln -sv ${working_dir}/dotvim ${HOME}/.vim
+  # Check if the symlink already exists
+  if [ -L "$destination_path" ]; then
+    echo "Symlink ${destination_path} already exists."
+  else
+    # The symlink does not exist, so create it
+    ln -s "$source_path" "$destination_path"
+    echo "Symlink ${destination_path} created."
+  fi
+}
 
-ln -sv ${working_dir}/dottmux.conf ${HOME}/.tmux.conf
-ln -sv ${working_dir}/dottmux-plugins ${HOME}/.tmux-plugins
-ln -sv ${working_dir}/dotgitconfig ${HOME}/.gitconfig
-ln -sv ${working_dir}/dotp10k.zsh ${HOME}/.p10k.sh
+
+create_symlink ${working_dir}/dotoh-my-zsh ${HOME}/.oh-my-zsh
+create_symlink ${working_dir}/dotzshrc ${HOME}/.zshrc
+
+create_symlink ${working_dir}/dotvimrc ${HOME}/.vimrc
+create_symlink ${working_dir}/dotvim ${HOME}/.vim
+
+create_symlink ${working_dir}/dottmux.conf ${HOME}/.tmux.conf
+create_symlink ${working_dir}/dottmux-plugins ${HOME}/.tmux-plugins
+create_symlink ${working_dir}/dotgitconfig ${HOME}/.gitconfig
+create_symlink ${working_dir}/dotp10k.zsh ${HOME}/.p10k.sh
 
 # install powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+if ! test -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"; then
+
+  echo "install powerlevel10k theme for zsh"
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+else
+  echo "powerlevel10k already installed"
+fi
+
 
 
 source ${HOME}/.zshrc
