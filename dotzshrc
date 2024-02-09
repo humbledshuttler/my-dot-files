@@ -147,5 +147,5 @@ function tmuxa {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
-export JAVA_HOME=$HOME/.jdks/corretto-18.0.1/
+export JAVA_HOME=$HOME/.jdks/corretto-19.0.2/
 export PATH=$JAVA_HOME/bin:$PATH
