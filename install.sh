@@ -70,7 +70,7 @@ create_symlink ${working_dir}/dotvim ${HOME}/.vim
 create_symlink ${working_dir}/dottmux.conf ${HOME}/.tmux.conf
 create_symlink ${working_dir}/dottmux-plugins ${HOME}/.tmux-plugins
 create_symlink ${working_dir}/dotgitconfig ${HOME}/.gitconfig
-create_symlink ${working_dir}/dotp10k.zsh ${HOME}/.p10k.sh
+create_symlink ${working_dir}/dotp10k.zsh ${HOME}/.p10k.zsh
 
 # install powerlevel10k
 if ! test -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"; then
