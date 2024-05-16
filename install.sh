@@ -23,6 +23,20 @@ else
     echo "Zsh is already installed"
 fi
 
+# Install Go if it's not already installed
+if ! command -v go >/dev/null 2>&1; then
+    if [ -f "$APT" ]; then
+        echo "Found apt. Installing Go"
+        sudo apt update
+        sudo apt install -y golang
+    elif [ -f "$DNF" ]; then
+        echo "Found dnf. Installing Go"
+        sudo dnf install -y golang
+    fi
+else
+    echo "Go is already installed"
+fi
+
 # Check if tmux is already installed
 if ! command -v tmux >/dev/null 2>&1; then
     # Install tmux
@@ -62,19 +76,47 @@ fi
 working_dir=${PWD}
 
 # Define the create_symlink function
+# Define the create_symlink function
 create_symlink() {
     local source_path=$1
     local destination_path=$2
 
-    # Check if the symlink already exists
-    if [ -L "$destination_path" ]; then
-        echo "Symlink ${destination_path} already exists."
+    if [ "$YES_TO_ALL" = "true" ]; then
+        # Force overwrite if YES_TO_ALL is true
+        ln -sf "$source_path" "$destination_path"
+        echo "Symlink ${destination_path} created."
+        return
+    fi
+
+    # Check if the destination file already exists
+    if [ -e "$destination_path" ]; then
+        read -p "File '$destination_path' already exists. Do you want to overwrite it? (y/n/a): " answer
+        case ${answer:0:1} in
+            y|Y )
+                # Overwrite the file
+                ln -sf "$source_path" "$destination_path"
+                echo "Symlink ${destination_path} created."
+                ;;
+            a|A )
+                # Say yes to all
+                export YES_TO_ALL="true"
+                ln -sf "$source_path" "$destination_path"
+                echo "Symlink ${destination_path} created."
+                ;;
+            * )
+                # Do not overwrite the file
+                echo "Skipping ${destination_path}."
+                ;;
+        esac
     else
         # The symlink does not exist, so create it
         ln -s "$source_path" "$destination_path"
         echo "Symlink ${destination_path} created."
     fi
 }
+
+
+
 
 create_symlink ${working_dir}/dotoh-my-zsh ${HOME}/.oh-my-zsh
 create_symlink ${working_dir}/dotzshrc ${HOME}/.zshrc
