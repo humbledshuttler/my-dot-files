@@ -72,12 +72,15 @@ POWERLEVEL9K_MODE="nerdfont-complete"
 plugins=(
   git
   history-search-multi-word
+  aws
 )
 
 source $ZSH/oh-my-zsh.sh
 # add anyother zshrc scripts to be loaded
 # source ${HOME}/my-dot-files/dotgitaliasrc
 
+HISTSIZE=10000000
+SAVEHIST=10000000
 
 # User configuration
 
@@ -147,5 +150,17 @@ function tmuxa {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
-export JAVA_HOME=$HOME/.jdks/openjdk-21.0.2/
+export JAVA_HOME=$HOME/.jdks/corretto-18.0.2/
 export PATH=$JAVA_HOME/bin:$PATH
+export PATH=/opt/gradle/gradle-8.4/bin:$PATH
+alias python='/usr/bin/python3'
+export PATH="$HOME/.local/bin:$PATH"
+export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$HOME/swagger-codegen/bin
+export PATH=$PATH:$GOBIN
+alias swagger-codegen="java -jar $HOME/swagger-codegen/bin/swagger-codegen-cli"
+#Auto tab complete for AWS Cli
+export PATH=usr/local/bin/aws_completer:$PATH
+autoload -Uz compinit && compinit
