@@ -160,6 +160,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$HOME/swagger-codegen/bin
 export PATH=$PATH:$GOBIN
+export PATH=$PATH:/usr/local/bin/localstack
 alias swagger-codegen="java -jar $HOME/swagger-codegen/bin/swagger-codegen-cli"
 #Auto tab complete for AWS Cli
 export PATH=usr/local/bin/aws_completer:$PATH

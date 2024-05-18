@@ -134,6 +134,8 @@ for file in ${working_dir}/dev-tools/*; do
     sudo ln -s "$file" /usr/local/bin/
 done
 
+sudo apt-get install -y fonts-powerline
+
 # Install powerlevel10k
 if ! test -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"; then
     echo "Install powerlevel10k theme for zsh"
