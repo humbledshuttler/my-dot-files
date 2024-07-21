@@ -156,12 +156,13 @@ export PATH=/opt/gradle/gradle-8.4/bin:$PATH
 alias python='/usr/bin/python3'
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$HOME/swagger-codegen/bin
 export PATH=$PATH:$GOBIN
 export PATH=$PATH:/usr/local/bin/localstack
-alias swagger-codegen="java -jar $HOME/swagger-codegen/bin/swagger-codegen-cli"
+alias swagger-codegen="java -jar /usr/local/bin/swagger-codegen-cli.jar"
 #Auto tab complete for AWS Cli
 export PATH=usr/local/bin/aws_completer:$PATH
 autoload -Uz compinit && compinit
