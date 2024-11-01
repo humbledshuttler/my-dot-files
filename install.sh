@@ -73,9 +73,36 @@ else
     echo "ctags is already installed"
 fi
 
+# Install Make if it's not already installed
+if ! command -v make >/dev/null 2>&1; then
+    if [ -f "$APT" ]; then
+        echo "Found apt. Installing make"
+        sudo apt update
+        sudo apt install -y make
+    elif [ -f "$DNF" ]; then
+        echo "Found dnf. Installing make"
+        sudo dnf install -y make
+    fi
+else
+    echo "Make is already installed"
+fi
+
+# Install Vim if it's not already installed
+if ! command -v vim >/dev/null 2>&1; then
+    if [ -f "$APT" ]; then
+        echo "Found apt. Installing vim"
+        sudo apt update
+        sudo apt install -y vim
+    elif [ -f "$DNF" ]; then
+        echo "Found dnf. Installing vim"
+        sudo dnf install -y vim
+    fi
+else
+    echo "Vim is already installed"
+fi
+
 working_dir=${PWD}
 
-# Define the create_symlink function
 # Define the create_symlink function
 create_symlink() {
     local source_path=$1
@@ -114,9 +141,6 @@ create_symlink() {
         echo "Symlink ${destination_path} created."
     fi
 }
-
-
-
 
 create_symlink ${working_dir}/dotoh-my-zsh ${HOME}/.oh-my-zsh
 create_symlink ${working_dir}/dotzshrc ${HOME}/.zshrc
