@@ -101,6 +101,20 @@ else
     echo "Vim is already installed"
 fi
 
+# Install Curl if it's not already installed
+if ! command -v curl >/dev/null 2>&1; then
+    if [ -f "$APT" ]; then
+        echo "Found apt. Installing curl"
+        sudo apt update
+        sudo apt install -y curl
+    elif [ -f "$DNF" ]; then
+        echo "Found dnf. Installing curl"
+        sudo dnf install -y curl
+    fi
+else
+    echo "Curl is already installed"
+fi
+
 working_dir=${PWD}
 
 # Define the create_symlink function
