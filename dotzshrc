@@ -166,3 +166,7 @@ alias swagger-codegen="java -jar /usr/local/bin/swagger-codegen-cli.jar"
 #Auto tab complete for AWS Cli
 export PATH=usr/local/bin/aws_completer:$PATH
 autoload -Uz compinit && compinit
+
+
+eval "$(logcli --completion-script-zsh)"
+source ~/.logcli.env
