@@ -1,0 +1,18 @@
+[Unit]
+Description=Daily Google Chrome update check
+
+[Timer]
+# Midday, when the machine is most likely to be on and online.
+OnCalendar=*-*-* 12:00:00
+
+# Spread the load so every machine doesn't hit Google at once.
+RandomizedDelaySec=30min
+
+# If the machine was off at 12:00, run shortly after the next boot instead of
+# silently skipping the day.
+Persistent=true
+
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

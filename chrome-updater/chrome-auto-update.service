@@ -1,0 +1,16 @@
+[Unit]
+Description=Update Google Chrome from Google's apt repository
+Documentation=https://github.com/humbledshuttler/my-dot-files
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/chrome-auto-update
+
+# Don't let a slow network hang the run forever.
+TimeoutStartSec=15min
+
+# Be polite about resources - this is a background chore.
+Nice=10
+IOSchedulingClass=idle
