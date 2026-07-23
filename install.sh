@@ -167,6 +167,21 @@ create_symlink ${working_dir}/dottmux-plugins ${HOME}/.tmux-plugins
 create_symlink ${working_dir}/dotgitconfig ${HOME}/.gitconfig
 create_symlink ${working_dir}/dotp10k.zsh ${HOME}/.p10k.zsh
 
+# Claude Code hooks (see dotclaude/README.md). claude itself is not installed
+# here -- the hooks no-op safely until it is on PATH.
+if command -v python3 >/dev/null 2>&1; then
+    mkdir -p ${HOME}/.claude/hooks
+    for hook in ${working_dir}/dotclaude/hooks/*.sh; do
+        create_symlink "$hook" "${HOME}/.claude/hooks/$(basename "$hook")"
+    done
+    python3 ${working_dir}/dotclaude/merge-settings-hooks.py
+    if ! command -v claude >/dev/null 2>&1; then
+        echo "Note: claude not found on PATH -- Claude hooks installed but inactive until it is."
+    fi
+else
+    echo "python3 not found. Skipping Claude hook installation."
+fi
+
 # Use sudo to create symbolic links in /usr/local/bin
 for file in ${working_dir}/dev-tools/*; do
     sudo ln -s "$file" /usr/local/bin/
