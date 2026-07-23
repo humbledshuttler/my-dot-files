@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$HOME/.claude/hooks/tmux-session-map.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
