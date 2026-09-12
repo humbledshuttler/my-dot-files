@@ -73,6 +73,20 @@ else
     echo "ctags is already installed"
 fi
 
+# Install fzf if it's not already installed (required by tmux-spotlight)
+if ! command -v fzf >/dev/null 2>&1; then
+    if [ -f "$APT" ]; then
+        echo "Found apt. Installing fzf"
+        sudo apt update
+        sudo apt install -y fzf
+    elif [ -f "$DNF" ]; then
+        echo "Found dnf. Installing fzf"
+        sudo dnf install -y fzf
+    fi
+else
+    echo "fzf is already installed"
+fi
+
 # Install Make if it's not already installed
 if ! command -v make >/dev/null 2>&1; then
     if [ -f "$APT" ]; then
@@ -113,6 +127,12 @@ if ! command -v curl >/dev/null 2>&1; then
     fi
 else
     echo "Curl is already installed"
+fi
+
+# tmux plugins tracked as submodules (e.g. tmux-spotlight) need fetching before
+# ~/.tmux-plugins points at them.
+if [ -f .gitmodules ]; then
+    git submodule update --init --recursive
 fi
 
 working_dir=${PWD}
